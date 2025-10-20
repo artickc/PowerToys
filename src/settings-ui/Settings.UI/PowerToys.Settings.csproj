@@ -22,6 +22,7 @@
 	<ItemGroup>
 		<None Remove="Assets\Settings\Modules\APDialog.dark.png" />
 		<None Remove="Assets\Settings\Modules\APDialog.light.png" />
+		<None Remove="Assets\Settings\Modules\LightSwitch.png" />
 		<None Remove="SettingsXAML\Controls\Dashboard\CheckUpdateControl.xaml" />
 		<None Remove="SettingsXAML\Controls\Dashboard\ShortcutConflictControl.xaml" />
 		<None Remove="SettingsXAML\Controls\KeyVisual\KeyCharPresenter.xaml" />
@@ -63,7 +64,10 @@
 		<PackageReference Include="CommunityToolkit.WinUI.Animations" />
 		<PackageReference Include="CommunityToolkit.WinUI.Extensions" />
 		<PackageReference Include="CommunityToolkit.WinUI.Converters" />
-		<PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Markdown" />
+		<PackageReference Include="CommunityToolkit.Labs.WinUI.Controls.MarkdownTextBlock" />
+		<PackageReference Include="System.Net.Http" />
+		<PackageReference Include="System.Private.Uri" />
+		<PackageReference Include="System.Text.RegularExpressions" />
 		<PackageReference Include="WinUIEx" />
 		<!-- Including MessagePack to force version, since it's used by StreamJsonRpc but contains vulnerabilities. After StreamJsonRpc updates the version of MessagePack, we can upgrade StreamJsonRpc instead. -->
 		<PackageReference Include="MessagePack" />
@@ -151,9 +155,14 @@
 		</None>
 		<None Update="Assets\Settings\Scripts\DisableModule.ps1">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>		<Page Update="SettingsXAML\Controls\TitleBar\TitleBar.xaml">
+		</None>
+		<Page Update="SettingsXAML\Controls\TitleBar\TitleBar.xaml">
+			<Generator>MSBuild:Compile</Generator>
 		</Page>
 		<Page Update="SettingsXAML\Controls\KeyVisual\KeyCharPresenter.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Update="SettingsXAML\Controls\GPOInfoControl.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
 		<Page Update="SettingsXAML\Controls\Dashboard\ShortcutConflictControl.xaml">
@@ -162,6 +171,12 @@
 		<Page Update="SettingsXAML\Controls\Dashboard\CheckUpdateControl.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
+		    <Page Update="SettingsXAML\Controls\Timeline\TimelineStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="SettingsXAML\Controls\Timeline\Timeline.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -176,7 +191,7 @@
 		</Page>
 	</ItemGroup>
 
-	<Target Name="BuildXamlIndexBeforeSettings" BeforeTargets="CoreCompile">
+	<Target Name="BuildXamlIndexBeforeSettings" BeforeTargets="CoreCompile" Condition="'$(DesignTimeBuild)' != 'true'">
 		<Message Importance="high" Text="[Settings] Building XamlIndexBuilder prior to compile. Views='$(MSBuildProjectDirectory)\SettingsXAML\Views' Out='$(GeneratedJsonFile)'" />
 		<MSBuild Projects="..\Settings.UI.XamlIndexBuilder\Settings.UI.XamlIndexBuilder.csproj" Targets="Build" Properties="Configuration=$(Configuration);Platform=Any CPU;TargetFramework=net9.0;XamlViewsDir=$(MSBuildProjectDirectory)\SettingsXAML\Views;GeneratedJsonFile=$(GeneratedJsonFile)" />
 	</Target>

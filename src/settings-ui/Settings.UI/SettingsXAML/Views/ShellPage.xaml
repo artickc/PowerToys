@@ -177,6 +177,9 @@
                     AutomationProperties.AutomationId="SystemToolsNavItem"
                     Icon="{ui:BitmapIcon Source=/Assets/Settings/Icons/SystemTools.png}"
                     SelectsOnInvoked="False">
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge Style="{StaticResource NewInfoBadge}" />
+                    </NavigationViewItem.InfoBadge>
                     <NavigationViewItem.MenuItems>
                         <NavigationViewItem
                             x:Name="AdvancedPasteNavigationItem"
@@ -203,6 +206,16 @@
                             AutomationProperties.AutomationId="ColorPickerNavItem"
                             Icon="{ui:BitmapIcon Source=/Assets/Settings/Icons/ColorPicker.png}" />
                         <NavigationViewItem
+                            x:Name="LightSwitchNavigationItem"
+                            x:Uid="Shell_LightSwitch"
+                            helpers:NavHelper.NavigateTo="views:LightSwitchPage"
+                            AutomationProperties.AutomationId="LightSwitchNavItem"
+                            Icon="{ui:BitmapIcon Source=/Assets/Settings/Icons/LightSwitch.png}">
+                            <NavigationViewItem.InfoBadge>
+                                <InfoBadge Style="{StaticResource NewInfoBadge}" />
+                            </NavigationViewItem.InfoBadge>
+                        </NavigationViewItem>
+                        <NavigationViewItem
                             x:Name="PowerLauncherNavigationItem"
                             x:Uid="Shell_PowerLauncher"
                             helpers:NavHelper.NavigateTo="views:PowerLauncherPage"
@@ -212,7 +225,7 @@
                             x:Name="MeasureToolNavigationItem"
                             x:Uid="Shell_MeasureTool"
                             helpers:NavHelper.NavigateTo="views:MeasureToolPage"
-                            AutomationProperties.AutomationId="MeasureToolNavItem"
+                            AutomationProperties.AutomationId="ScreenRulerNavItem"
                             Icon="{ui:BitmapIcon Source=/Assets/Settings/Icons/ScreenRuler.png}" />
                         <NavigationViewItem
                             x:Name="ShortcutGuideNavigationItem"

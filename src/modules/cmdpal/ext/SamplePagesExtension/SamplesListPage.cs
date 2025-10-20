@@ -33,6 +33,11 @@ public partial class SamplesListPage : ListPage
             Title = "Dynamic List Page Command",
             Subtitle = "Changes the list of items in response to the typed query",
         },
+        new ListItem(new SampleGalleryListPage())
+        {
+            Title = "Gallery List Page Command",
+            Subtitle = "Displays items as a gallery",
+        },
         new ListItem(new OnLoadPage())
         {
             Title = "Demo of OnLoad/OnUnload",
@@ -42,6 +47,11 @@ public partial class SamplesListPage : ListPage
         {
             Title = "Sample Icon Page",
             Subtitle = "A demo of using icons in various ways",
+        },
+        new ListItem(new SlowListPage())
+        {
+            Title = "Slow loading list page",
+            Subtitle = "A demo of a list page that takes a while to load",
         },
 
         // Content pages
@@ -71,10 +81,16 @@ public partial class SamplesListPage : ListPage
             Title = "Markdown with multiple blocks",
             Subtitle = "A page with multiple blocks of rendered markdown",
         },
-            new ListItem(new SampleMarkdownDetails())
+        new ListItem(new SampleMarkdownDetails())
         {
             Title = "Markdown with details",
             Subtitle = "A page with markdown and details",
+        },
+        new ListItem(new SampleMarkdownImagesPage())
+        {
+            Title = "Markdown with images",
+            Subtitle = "A page with rendered markdown and images",
+            Icon = new IconInfo("\uee71"),
         },
 
         // Settings helpers
